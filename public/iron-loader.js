@@ -1,27 +1,26 @@
 (function () {
-  alert("IRON COMMERCE ONLINE PELO RENDER");
+  console.log("🔥 Iron Loader iniciado");
 
-  console.log("🔥 IRON LOADER RENDER ATIVO");
+  const IRON_BASE_URL = "https://ironcommerce.onrender.com";
 
-  document.body.insertAdjacentHTML(
-    "afterbegin",
-    `
-    <div style="
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      z-index:999999999;
-      background:#ff3b00;
-      color:white;
-      text-align:center;
-      padding:20px;
-      font-size:28px;
-      font-weight:900;
-      font-family:Arial,sans-serif;
-    ">
-      🔥 IRON COMMERCE ONLINE PELO RENDER 🔥
-    </div>
-    `
-  );
+  const activeModules = [
+    "theme",
+    "cro",
+    "stories"
+  ];
+
+  function loadModule(name) {
+    const script = document.createElement("script");
+    script.src = `${IRON_BASE_URL}/modules/${name}.js?v=${Date.now()}`;
+    script.async = true;
+    script.onload = function () {
+      console.log(`✅ Iron módulo carregado: ${name}`);
+    };
+    script.onerror = function () {
+      console.error(`❌ Erro ao carregar módulo: ${name}`);
+    };
+    document.head.appendChild(script);
+  }
+
+  activeModules.forEach(loadModule);
 })();
