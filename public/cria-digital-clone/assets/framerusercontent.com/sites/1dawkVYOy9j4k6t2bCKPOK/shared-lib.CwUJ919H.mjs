@@ -1,0 +1,2 @@
+import{t as e}from"./rolldown-runtime.Ca66XBs-.mjs";function t(e,t){return{description:`Criamos soluções digitais com propósito. Sem fórmula mágica. Implementamos tecnologia planejada para escalar negócios. `,favicon:`https://framerusercontent.com/assets/tM9bpx0NVYY5DZElFhfoIRrZwWs.png`,robots:`max-image-preview:large`,socialImage:`https://framerusercontent.com/assets/ILSzQPwAG06feancZn56nEA.jpg`,title:`Cria Digital - Software Makers`}}var n=e((()=>{}));export{t as n,n as t};
+//# sourceMappingURL=shared-lib.CwUJ919H.mjs.map

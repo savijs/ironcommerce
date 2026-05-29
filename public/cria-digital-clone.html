@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clone Editavel - CRIA Digital</title>
+  <style>
+    :root {
+      --bg: #0f0f10;
+      --card: #1a1a1d;
+      --text: #f6f6f7;
+      --muted: #a5a5ad;
+      --line: #2a2a31;
+      --brand: #ffffff;
+      --accent: #6e7bff;
+      --container: 1120px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Inter, Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(var(--container), 92vw); margin: 0 auto; }
+    header { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(10px); background: rgba(15, 15, 16, 0.8); border-bottom: 1px solid var(--line); }
+    nav { height: 72px; display: flex; align-items: center; justify-content: space-between; }
+    nav ul { list-style: none; display: flex; gap: 20px; }
+    .hero { padding: 72px 0 56px; border-bottom: 1px solid var(--line); }
+    .hero h1 { font-size: clamp(34px, 7vw, 82px); line-height: .96; margin-bottom: 16px; }
+    .hero p { max-width: 720px; color: var(--muted); font-size: 18px; }
+    .badge-row { margin-top: 22px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .badge { border: 1px solid var(--line); border-radius: 100px; padding: 8px 12px; color: var(--muted); font-size: 14px; }
+    section { padding: 64px 0; border-bottom: 1px solid var(--line); }
+    h2 { font-size: clamp(30px, 4vw, 48px); margin-bottom: 12px; }
+    .sub { color: var(--muted); max-width: 860px; margin-bottom: 26px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
+    .card h3 { margin-bottom: 10px; }
+    .card p { color: var(--muted); }
+    .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 22px; }
+    .stat { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
+    .stat strong { font-size: 28px; display: block; margin-bottom: 8px; }
+    .faq details { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; }
+    .faq summary { cursor: pointer; font-weight: 600; }
+    .faq p { color: var(--muted); margin-top: 10px; }
+    .cta { background: linear-gradient(135deg, #202126, #14151a); border: 1px solid var(--line); border-radius: 18px; padding: 24px; }
+    footer { padding: 38px 0; color: var(--muted); }
+    .small { font-size: 14px; color: var(--muted); }
+    @media (max-width: 900px) {
+      .grid-3, .grid-2, .stats { grid-template-columns: 1fr; }
+      nav { height: auto; padding: 14px 0; flex-direction: column; align-items: flex-start; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <strong>CRIA Digital</strong>
+        <ul>
+          <li><a href="#projetos">Projetos</a></li>
+          <li><a href="#servicos">Servicos</a></li>
+          <li><a href="#metodologia">Metodologia</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>Software, makers, /// Aplicativos, /// ERPs &amp; CRMs, /// Plataformas, /// WebSites, /// Outsourcing</h1>
+        <p>Solucoes digitais com proposito. Sem formula magica. Implementamos tecnologia planejada para escalar negocios.</p>
+        <div class="badge-row">
+          <span class="badge">Parceiro estrategico</span>
+          <span class="badge">Desenvolvimento ponta a ponta</span>
+          <span class="badge">UX, Frontend, Backend e Infra</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="projetos">
+      <div class="container">
+        <h2>Criacoes</h2>
+        <p class="sub">Impulsionamos empresas de diferentes segmentos com tecnologia e inovacao.</p>
+        <div class="grid-3">
+          <article class="card"><h3>EQR Holding / Sistema</h3><p>Projeto institucional e operacional.</p></article>
+          <article class="card"><h3>EQR Real Estate / Website</h3><p>Website com foco em performance e conversao.</p></article>
+          <article class="card"><h3>Great Place to Work / Sistema</h3><p>Fluxo digital com processos internos.</p></article>
+          <article class="card"><h3>EQR Green Assets / Website</h3><p>Presenca digital e comunicacao da marca.</p></article>
+          <article class="card"><h3>Agrity / Sistema</h3><p>Sistema para operacao e crescimento.</p></article>
+          <article class="card"><h3>EQR Coin / Website</h3><p>Website para produto financeiro digital.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Resultados comprovados</h2>
+        <p class="sub">Combinamos tecnologia com proposito para aumentar performance e otimizar resultados.</p>
+        <div class="stats">
+          <div class="stat"><strong>50+</strong><span>Clientes impactados</span></div>
+          <div class="stat"><strong>120+</strong><span>Projetos criados</span></div>
+          <div class="stat"><strong>28</strong><span>Profissionais no time</span></div>
+          <div class="stat"><strong>90%</strong><span>Clientes recorrentes</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicos">
+      <div class="container">
+        <h2>Servicos</h2>
+        <p class="sub">UX Research, UI, Frontend, Backend/APIs e Infraestrutura para construir produtos escalaveis.</p>
+        <div class="grid-2">
+          <article class="card"><h3>(001) UX Research</h3><p>Jornada, entrevistas, testes de usabilidade e priorizacao de problemas.</p></article>
+          <article class="card"><h3>(002) UI - Interface do Usuario</h3><p>Design visual, componentes, interacao e foco em conversao.</p></article>
+          <article class="card"><h3>(003) Frontend</h3><p>Implementacao com codigo limpo, modular e responsivo.</p></article>
+          <article class="card"><h3>(004) Backend e APIs</h3><p>Banco de dados, seguranca, desempenho e integracoes.</p></article>
+          <article class="card"><h3>(005) Infraestrutura</h3><p>AWS, Google, Azure, Digital Ocean e monitoramento continuo.</p></article>
+          <article class="card"><h3>Outsourcing</h3><p>Alocacao de profissionais e squads com agilidade e previsibilidade.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="metodologia">
+      <div class="container">
+        <h2>Nossa metodologia</h2>
+        <p class="sub">Solucoes digitais de ponta a ponta para construir e transformar negocios.</p>
+        <div class="grid-2">
+          <article class="card"><h3>Primeira fase - Estruturacao</h3><p>Metas, estudo de mercado e cronograma inicial.</p></article>
+          <article class="card"><h3>Segunda fase - Design do Produto</h3><p>Interface funcional com foco em experiencia e conversao.</p></article>
+          <article class="card"><h3>Terceira fase - Desenvolvimento</h3><p>Entrega segura, escalavel e performatica.</p></article>
+          <article class="card"><h3>Quarta fase - Sustentacao Continua</h3><p>Evolucao, suporte e manutencao constante.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="faq">
+      <div class="container">
+        <h2>FAQ</h2>
+        <p class="sub">Respostas diretas sobre software inteligente, escalavel e seguro.</p>
+        <details open>
+          <summary>Quanto tempo leva para desenvolver um software personalizado?</summary>
+          <p>Depende da complexidade. Projetos menores podem levar de 30 a 60 dias, e plataformas mais completas de 90 a 180 dias.</p>
+        </details>
+        <details>
+          <summary>Como e feita a infraestrutura?</summary>
+          <p>Base em AWS com boas praticas de DevOps, alta disponibilidade, seguranca e monitoramento.</p>
+        </details>
+        <details>
+          <summary>Vocês fazem manutencao continua?</summary>
+          <p>Sim. Inclui monitoramento, atualizacoes, correcoes e evolucao de funcionalidades.</p>
+        </details>
+        <details>
+          <summary>Conseguem integrar com APIs e sistemas externos?</summary>
+          <p>Sim. Integramos com REST, GraphQL e Webhooks em ERPs, CRMs e gateways de pagamento.</p>
+        </details>
+      </div>
+    </section>
+
+    <section id="contato">
+      <div class="container">
+        <div class="cta">
+          <h2>Vamos conversar</h2>
+          <p class="sub">Fale sobre seu projeto. Aplicativos, sistemas, websites ou infraestrutura.</p>
+          <p><strong>Telefone:</strong> +55 51 3191-6690</p>
+          <p><strong>Email:</strong> contato@cria.digital</p>
+          <p class="small">Observacao: este arquivo e um clone editavel local em HTML/CSS.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 CRIA Digital - Clone local editavel</p>
+    </div>
+  </footer>
+</body>
+</html>
