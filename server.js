@@ -2,6 +2,7 @@ const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const supabase = require("./supabase");
 
 dotenv.config();
 
@@ -114,6 +115,43 @@ app.get("/install-script", async (req, res) => {
     }
   });
 
+
+app.get("/config/:storeId", async (req, res) => {
+  const { storeId } = req.params;
+
+  try {
+    const { data, error } = await supabase
+      .from("stores")
+      .select("*")
+      .eq("store_id", storeId)
+      .single();
+
+    if (error) {
+      return res.status(404).json({
+        success: false,
+        message: "Loja não encontrada",
+        error
+      });
+    }
+
+    res.json({
+      success: true,
+      store_id: data.store_id,
+      plan: data.plan,
+      modules: {
+        theme: data.theme_enabled,
+        cro: data.cro_enabled,
+        stories: data.stories_enabled,
+        reviews: data.reviews_enabled
+      }
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err.message
+    });
+  }
+});
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("🔥 Servidor rodando");
