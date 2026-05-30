@@ -166,6 +166,38 @@ app.get("/debug/stores", async (req, res) => {
   });
 });
 
+app.get("/stories/:storeId", async (req, res) => {
+  const { storeId } = req.params;
+
+  try {
+    const { data, error } = await supabase
+      .from("stories")
+      .select("*")
+      .eq("store_id", storeId)
+      .eq("active", true)
+      .order("sort_order", { ascending: true });
+
+    if (error) {
+      return res.status(400).json({
+        success: false,
+        message: "Erro ao buscar stories",
+        error
+      });
+    }
+
+    res.json({
+      success: true,
+      store_id: storeId,
+      stories: data
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err.message
+    });
+  }
+});
+
 
 
 app.listen(process.env.PORT || 3000, () => {
