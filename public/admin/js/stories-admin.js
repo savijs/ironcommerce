@@ -7,6 +7,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   const form = document.getElementById("story-form");
   const modalTitle = document.getElementById("modal-title");
   const storyIdInput = document.getElementById("story-id");
+  const videoInput = document.getElementById("story-video");
+  const videoCurrentHint = document.getElementById("story-video-current");
+
+  const MAX_VIDEO_BYTES = 50 * 1024 * 1024;
+  const ALLOWED_VIDEO_TYPES = ["video/mp4", "video/webm", "video/quicktime"];
 
   let stores = [];
   let storiesCache = [];
@@ -41,6 +46,7 @@ document.addEventListener("DOMContentLoaded", async () => {
               <th>ID</th>
               <th>Loja</th>
               <th>Título</th>
+              <th>Vídeo</th>
               <th>Link</th>
               <th>Ordem</th>
               <th>Ativo</th>
@@ -65,6 +71,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         <td>${story.id}</td>
         <td>${story.store_id}</td>
         <td>${story.title}</td>
+        <td>${story.media_url ? "Sim" : "Não"}</td>
         <td>${story.link_url || "—"}</td>
         <td>${story.sort_order ?? 0}</td>
         <td>${IronAdmin.ui.formatBool(story.active)}</td>
@@ -100,8 +107,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  function setVideoHint(story) {
+    if (story?.media_url) {
+      videoCurrentHint.innerHTML = `Vídeo atual: <a href="${story.media_url}" target="_blank" rel="noopener">ver arquivo</a>. Envie um novo para substituir.`;
+      return;
+    }
+
+    videoCurrentHint.textContent = "Nenhum vídeo cadastrado.";
+  }
+
   function openModal(story = null) {
     modal.classList.add("open");
+    videoInput.value = "";
 
     if (story) {
       modalTitle.textContent = "Editar story";
@@ -112,12 +129,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.getElementById("story-link-url").value = story.link_url || "";
       document.getElementById("story-sort-order").value = story.sort_order ?? 0;
       document.getElementById("story-active").checked = !!story.active;
+      setVideoHint(story);
     } else {
       modalTitle.textContent = "Novo story";
       storyIdInput.value = "";
       storyStoreSelect.disabled = false;
       form.reset();
       document.getElementById("story-active").checked = true;
+      videoCurrentHint.textContent = "Opcional. Stories sem vídeo usam fallback visual na loja.";
 
       if (storeFilter.value) {
         storyStoreSelect.value = storeFilter.value;
@@ -129,6 +148,39 @@ document.addEventListener("DOMContentLoaded", async () => {
     modal.classList.remove("open");
     storyStoreSelect.disabled = false;
     form.reset();
+    videoCurrentHint.textContent = "";
+  }
+
+  function validateVideoFile(file) {
+    if (!file) return null;
+
+    if (!ALLOWED_VIDEO_TYPES.includes(file.type)) {
+      return "Formato inválido. Use .mp4, .webm ou .mov";
+    }
+
+    if (file.size > MAX_VIDEO_BYTES) {
+      return "Vídeo excede o limite de 50MB";
+    }
+
+    return null;
+  }
+
+  function buildFormData() {
+    const formData = new FormData();
+
+    formData.append("store_id", storyStoreSelect.value);
+    formData.append("title", document.getElementById("story-title").value.trim());
+    formData.append("link_url", document.getElementById("story-link-url").value.trim());
+    formData.append("sort_order", String(Number(document.getElementById("story-sort-order").value) || 0));
+    formData.append("active", document.getElementById("story-active").checked ? "true" : "false");
+
+    const videoFile = videoInput.files[0];
+
+    if (videoFile) {
+      formData.append("video", videoFile);
+    }
+
+    return { formData, videoFile };
   }
 
   async function deactivateStory(id) {
@@ -166,8 +218,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    const payload = {
-      store_id: storyStoreSelect.value,
+    const { formData, videoFile } = buildFormData();
+    const videoError = validateVideoFile(videoFile);
+
+    if (videoError) {
+      IronAdmin.ui.showAlert(alertContainer, videoError, "error");
+      return;
+    }
+
+    const textPayload = {
       title: document.getElementById("story-title").value.trim(),
       link_url: document.getElementById("story-link-url").value.trim(),
       sort_order: Number(document.getElementById("story-sort-order").value) || 0,
@@ -176,15 +235,22 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     try {
       if (storyIdInput.value) {
-        await IronAdmin.api.updateStory(storyIdInput.value, {
-          title: payload.title,
-          link_url: payload.link_url,
-          sort_order: payload.sort_order,
-          active: payload.active,
-        });
+        if (videoFile) {
+          formData.append("store_id", storyStoreSelect.value);
+          await IronAdmin.api.updateStoryWithVideo(storyIdInput.value, formData);
+        } else {
+          await IronAdmin.api.updateStory(storyIdInput.value, textPayload);
+        }
+
         IronAdmin.ui.showAlert(alertContainer, "Story atualizado.");
+      } else if (videoFile) {
+        await IronAdmin.api.createStoryWithVideo(formData);
+        IronAdmin.ui.showAlert(alertContainer, "Story criado com vídeo.");
       } else {
-        await IronAdmin.api.createStory(payload);
+        await IronAdmin.api.createStory({
+          store_id: storyStoreSelect.value,
+          ...textPayload,
+        });
         IronAdmin.ui.showAlert(alertContainer, "Story criado.");
       }
 

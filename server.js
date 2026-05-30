@@ -134,6 +134,8 @@ app.get("/config/:storeId", async (req, res) => {
       });
     }
 
+    res.set("Cache-Control", "no-store, no-cache, must-revalidate");
+
     res.json({
       success: true,
       store_id: data.store_id,

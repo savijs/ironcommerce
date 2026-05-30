@@ -19,6 +19,21 @@ IronAdmin.api = {
     return data;
   },
 
+  async requestMultipart(path, options = {}) {
+    const response = await fetch(path, {
+      method: options.method || "POST",
+      body: options.body,
+    });
+
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      throw new Error(data.message || "Erro na requisição");
+    }
+
+    return data;
+  },
+
   getStats() {
     return this.request("/api/admin/stats");
   },
@@ -46,10 +61,24 @@ IronAdmin.api = {
     });
   },
 
+  createStoryWithVideo(formData) {
+    return this.requestMultipart("/api/admin/stories", {
+      method: "POST",
+      body: formData,
+    });
+  },
+
   updateStory(id, payload) {
     return this.request(`/api/admin/stories/${id}`, {
       method: "PATCH",
       body: JSON.stringify(payload),
+    });
+  },
+
+  updateStoryWithVideo(id, formData) {
+    return this.requestMultipart(`/api/admin/stories/${id}`, {
+      method: "PATCH",
+      body: formData,
     });
   },
 

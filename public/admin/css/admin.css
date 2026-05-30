@@ -243,6 +243,17 @@ a {
   border-color: #ff4d00;
 }
 
+.form-hint {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: #888;
+}
+
+.form-hint a {
+  color: #ff6b2c;
+  text-decoration: underline;
+}
+
 .toggle-cell {
   text-align: center;
 }
