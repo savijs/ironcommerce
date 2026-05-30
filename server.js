@@ -153,6 +153,21 @@ app.get("/config/:storeId", async (req, res) => {
   }
 });
 
+app.get("/debug/stores", async (req, res) => {
+  const { data, error } = await supabase
+    .from("stores")
+    .select("*")
+    .limit(10);
+
+  res.json({
+    success: !error,
+    data,
+    error
+  });
+});
+
+
+
 app.listen(process.env.PORT || 3000, () => {
   console.log("🔥 Servidor rodando");
 });
