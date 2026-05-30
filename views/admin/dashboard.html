@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard — Iron Commerce</title>
+    <link rel="stylesheet" href="/admin/css/admin.css" />
+  </head>
+  <body>
+    <div class="admin-shell">
+      <aside class="admin-sidebar" id="admin-sidebar"></aside>
+
+      <main class="admin-main">
+        <header class="admin-header">
+          <span class="admin-badge">Ambiente MVP</span>
+          <h1>Dashboard</h1>
+          <p>Visão geral da plataforma Iron Commerce.</p>
+        </header>
+
+        <div id="alert-container"></div>
+
+        <section class="stats-grid" id="stats-grid">
+          <div class="stat-card">
+            <div class="label">Lojas</div>
+            <div class="value" id="stat-stores">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">Stories</div>
+            <div class="value" id="stat-stories">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">Módulos ativos</div>
+            <div class="value" id="stat-modules">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">Planos Pro</div>
+            <div class="value" id="stat-pro">—</div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Lojas recentes</h2>
+          <div id="recent-stores">
+            <div class="empty-state">Carregando...</div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/admin/js/api.js"></script>
+    <script src="/admin/js/layout.js"></script>
+    <script src="/admin/js/dashboard.js"></script>
+  </body>
+</html>

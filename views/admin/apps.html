@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apps — Iron Commerce</title>
+    <link rel="stylesheet" href="/admin/css/admin.css" />
+  </head>
+  <body>
+    <div class="admin-shell">
+      <aside class="admin-sidebar" id="admin-sidebar"></aside>
+
+      <main class="admin-main">
+        <header class="admin-header">
+          <span class="admin-badge">Ambiente MVP</span>
+          <h1>Apps</h1>
+          <p>Módulos disponíveis e status de integração.</p>
+        </header>
+
+        <section class="panel">
+          <h2>Módulos Iron Commerce</h2>
+          <div class="apps-grid" id="modules-grid"></div>
+        </section>
+
+        <section class="panel">
+          <h2>Integração Nuvemshop</h2>
+          <p style="color: #888; margin-top: 0">
+            Use o fluxo OAuth existente para conectar novas lojas. O script loader continua sendo
+            servido em <code>/iron-loader.js?store={store_id}</code>.
+          </p>
+          <a class="btn btn-primary" href="/">Conectar loja via OAuth</a>
+        </section>
+
+        <section class="panel">
+          <h2>Status por loja</h2>
+          <div id="store-modules-wrap">
+            <div class="empty-state">Carregando...</div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/admin/js/api.js"></script>
+    <script src="/admin/js/layout.js"></script>
+    <script src="/admin/js/apps.js"></script>
+  </body>
+</html>

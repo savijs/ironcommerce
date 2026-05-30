@@ -200,6 +200,9 @@ app.get("/stories/:storeId", async (req, res) => {
 
 
 
+require("./routes/admin-pages")(app);
+require("./routes/admin-api")(app);
+
 app.listen(process.env.PORT || 3000, () => {
   console.log("🔥 Servidor rodando");
 });

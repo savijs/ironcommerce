@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lojas — Iron Commerce</title>
+    <link rel="stylesheet" href="/admin/css/admin.css" />
+  </head>
+  <body>
+    <div class="admin-shell">
+      <aside class="admin-sidebar" id="admin-sidebar"></aside>
+
+      <main class="admin-main">
+        <header class="admin-header">
+          <span class="admin-badge">Ambiente MVP</span>
+          <h1>Lojas</h1>
+          <p>Liste lojas cadastradas e atualize plano e módulos.</p>
+        </header>
+
+        <div id="alert-container"></div>
+
+        <section class="panel">
+          <div id="stores-table-wrap">
+            <div class="empty-state">Carregando lojas...</div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/admin/js/api.js"></script>
+    <script src="/admin/js/layout.js"></script>
+    <script src="/admin/js/stores.js"></script>
+  </body>
+</html>
